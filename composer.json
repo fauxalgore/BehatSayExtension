@@ -7,5 +7,9 @@
             "email": "email@algore.website"
         }
     ],
+
+    "autoload": {
+      "psr-4": { "FauxAlGore\\BehatSay": "src/" }
+    },
     "require": {}
 }
