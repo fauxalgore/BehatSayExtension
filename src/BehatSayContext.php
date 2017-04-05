@@ -26,6 +26,12 @@ class BehatSayContext implements Context {
      */
     public function BeforeStep(BeforeStepScope $scope)
     {
-       exec('say hello');
+       exec('say ' . escapeshellarg ($this->getCompleteStepPhrase($scope))  );
+
+
     }
+  protected function getCompleteStepPhrase(BeforeStepScope $scope) {
+    return $scope->getStep()->getKeywordType() . ' '. $scope->getStep()->getText();
+
+  }
 }
