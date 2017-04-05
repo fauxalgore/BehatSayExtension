@@ -1,0 +1,11 @@
+{
+    "name": "fauxalgore/behat-say",
+    "description": "Hear your Behat steps through the 'say' command",
+    "authors": [
+        {
+            "name": "Faux Al Gore",
+            "email": "email@algore.website"
+        }
+    ],
+    "require": {}
+}
