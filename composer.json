@@ -7,14 +7,11 @@
             "email": "email@algore.website"
         }
     ],
-
     "autoload": {
       "psr-4": {
-        "FauxAlGore\\BehatSayExtension\\": "src/BehatSayExtension"
+        "FauxAlGore\\BehatSayExtension\\": "src/"
 
       }
-
-
     },
     "require": {
       "behat/behat": "^3.1"
