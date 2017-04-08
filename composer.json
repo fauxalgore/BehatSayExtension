@@ -9,7 +9,12 @@
     ],
 
     "autoload": {
-      "psr-4": { "FauxAlGore\\BehatSay\\": "src/" }
+      "psr-4": {
+        "FauxAlGore\\BehatSayExtension\\": "src/BehatSayExtension"
+
+      }
+
+
     },
     "require": {
       "behat/behat": "^3.1"
