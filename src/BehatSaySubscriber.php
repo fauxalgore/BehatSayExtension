@@ -9,7 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class BehatSaySubscriber implements EventSubscriberInterface
 {
 
-    public function BeforeStep(BeforeStepTested $scope)
+    public function beforeStep(BeforeStepTested $scope)
     {
         exec('say ' . escapeshellarg($this->getCompleteStepPhrase($scope)) . ' > /dev/null 2>/dev/null &');
     }
@@ -44,7 +44,7 @@ class BehatSaySubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            BeforeStepTested::BEFORE   => 'BeforeStep',
+            BeforeStepTested::BEFORE   => 'beforeStep',
             AfterStepTested::AFTER  => 'afterStep',
 
         );
