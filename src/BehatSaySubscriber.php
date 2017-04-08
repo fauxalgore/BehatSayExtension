@@ -13,11 +13,11 @@ class BehatSaySubscriber implements EventSubscriberInterface
         exec('say ' . escapeshellarg ($this->getCompleteStepPhrase($scope)) . ' > /dev/null 2>/dev/null &' );
     }
 
-    protected function getCompleteStepPhrase(BeforeStepTested $scope) {
-        return $scope->getStep()->getKeywordType() . ' '. $scope->getStep()->getText();
+    protected function getCompleteStepPhrase(BeforeStepTested $event) {
+        return $event->getStep()->getKeywordType() . ' '. $event->getStep()->getText();
     }
 
-    public function afterStep(AfterStepTested $scope) {
+    public function afterStep(AfterStepTested $event) {
         // This while loop exists to block execution of the tests until the
         // say command completes.
         while($this->isSayRunning()) {
