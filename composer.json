@@ -1,6 +1,6 @@
 {
-    "name": "fauxalgore/behat-say",
-    "description": "Hear your Behat steps through the 'say' command",
+    "name": "fauxalgore/BehatSayExtension",
+    "description": "Hear your Behat steps through the 'say' command.",
     "authors": [
         {
             "name": "Faux Al Gore",
