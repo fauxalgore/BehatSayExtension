@@ -1,30 +1,12 @@
 <?php
 
-
 namespace FauxAlGore\BehatSayExtension\ServiceContainer;
 
-use Behat\Behat\Context\ServiceContainer\ContextExtension;
-use Behat\MinkExtension\ServiceContainer\Driver\BrowserStackFactory;
-use Behat\MinkExtension\ServiceContainer\Driver\DriverFactory;
-use Behat\MinkExtension\ServiceContainer\Driver\GoutteFactory;
-use Behat\MinkExtension\ServiceContainer\Driver\SahiFactory;
-use Behat\MinkExtension\ServiceContainer\Driver\SauceLabsFactory;
-use Behat\MinkExtension\ServiceContainer\Driver\Selenium2Factory;
-use Behat\MinkExtension\ServiceContainer\Driver\SeleniumFactory;
-use Behat\MinkExtension\ServiceContainer\Driver\ZombieFactory;
-use Behat\Testwork\EventDispatcher\ServiceContainer\EventDispatcherExtension;
-use Behat\Testwork\ServiceContainer\Exception\ProcessingException;
 use Behat\Testwork\ServiceContainer\Extension as ExtensionInterface;
 use Behat\Testwork\ServiceContainer\ExtensionManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
-
-
-use Behat\Behat\Hook\Scope\BeforeStepScope;
-use Behat\Behat\Hook\Scope\AfterStepScope;
 
 class BehatSayExtension implements ExtensionInterface
 {
