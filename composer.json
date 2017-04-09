@@ -18,6 +18,10 @@
   },
   "require-dev": {
     "behat/mink-extension": "^2.2",
-    "behat/mink-goutte-driver": "^1.2"
+    "behat/mink-goutte-driver": "^1.2",
+    "squizlabs/php_codesniffer": "^2.8"
+  },
+  "scripts":{
+    "phpcs": "phpcs --standard=psr2 src"
   }
 }
