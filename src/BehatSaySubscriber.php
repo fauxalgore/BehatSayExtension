@@ -4,14 +4,57 @@ namespace FauxAlGore\BehatSayExtension;
 
 use Behat\Behat\EventDispatcher\Event\BeforeStepTested;
 use Behat\Behat\EventDispatcher\Event\AfterStepTested;
+use Behat\Behat\EventDispatcher\Event\BeforeScenarioTested;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
+use Behat\Gherkin\Node\StepNode;
 
 class BehatSaySubscriber implements EventSubscriberInterface
 {
 
-    public function beforeStep(BeforeStepTested $scope)
+    public function __construct($default_voice, $roles)
     {
-        exec('say ' . escapeshellarg($this->getCompleteStepPhrase($scope)) . ' > /dev/null 2>/dev/null &');
+        $this->default_voice = $default_voice;
+        $this->current_voice = $default_voice;
+        $this->role_voices = $roles;
+    }
+
+    public function isStepRoleSetting(StepNode $step)
+    {
+        return !empty(strpos($step->getText(), 'logged in as a'));
+    }
+
+    protected function getVoiceFlag()
+    {
+        if ($this->current_voice) {
+            return '--voice=' . $this->current_voice;
+        }
+        return '';
+    }
+
+    protected function setVoice(BeforeStepTested $event)
+    {
+        $step = $event->getStep();
+        if ($this->isStepRoleSetting($event->getStep())) {
+            foreach ($this->role_voices as $role => $voice) {
+                if (strpos($step->getText(), '"' . $role . '"')) {
+                    $this->current_voice = $voice;
+                }
+            }
+        }
+    }
+
+    // @todo, parse whole scenario to set voice or reset to default.
+    public function beforeScenario()
+    {
+    }
+
+    public function beforeStep(BeforeStepTested $event)
+    {
+        $this->setVoice($event);
+        $text = escapeshellarg($this->getCompleteStepPhrase($event));
+        $voice = $this->getVoiceFlag();
+        exec('say ' . $voice . ' ' . $text . ' > /dev/null 2>/dev/null &');
     }
 
     protected function getCompleteStepPhrase(BeforeStepTested $event)
@@ -46,6 +89,7 @@ class BehatSaySubscriber implements EventSubscriberInterface
         return array(
             BeforeStepTested::BEFORE   => 'beforeStep',
             AfterStepTested::AFTER  => 'afterStep',
+            BeforeScenarioTested::BEFORE => 'beforeScenario',
 
         );
     }
