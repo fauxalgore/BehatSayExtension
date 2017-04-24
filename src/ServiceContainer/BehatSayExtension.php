@@ -43,22 +43,19 @@ class BehatSayExtension implements ExtensionInterface
     {
 
         $builder
-            ->addDefaultsIfNotSet()
+          ->addDefaultsIfNotSet()
             ->children()
-
-          ->arrayNode('roles')
-
-          ->requiresAtLeastOneElement()
-          ->useAttributeAsKey('key')
-          ->prototype('variable')
-          ->end()
-          ->end()
-
-            // The voice setting is configurable but that configuration is not yet
-            // used by BehatSaySubscriber.
-            ->scalarNode('voice')->defaultNull()->end()
+              ->arrayNode('roles')
+              ->requiresAtLeastOneElement()
+              ->useAttributeAsKey('key')
+              ->prototype('variable')
             ->end()
-            ->end();
+          ->end()
+          // The voice setting is configurable but that configuration is not yet
+          // used by BehatSaySubscriber.
+          ->scalarNode('voice')->defaultNull()->end()
+          ->end()
+        ->end();
     }
 
     /**
