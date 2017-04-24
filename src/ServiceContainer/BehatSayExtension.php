@@ -45,11 +45,24 @@ class BehatSayExtension implements ExtensionInterface
         $builder
             ->addDefaultsIfNotSet()
             ->children()
+
+          ->arrayNode('roles')
+
+          ->requiresAtLeastOneElement()
+          ->useAttributeAsKey('key')
+          ->prototype('variable')
+          ->end()
+          ->end()
+
             // The voice setting is configurable but that configuration is not yet
             // used by BehatSaySubscriber.
             ->scalarNode('voice')->defaultNull()->end()
             ->end()
             ->end();
+
+
+
+
     }
 
     /**
@@ -60,11 +73,12 @@ class BehatSayExtension implements ExtensionInterface
    */
     public function load(ContainerBuilder $container, array $config)
     {
-
-        $definition = (new Definition('FauxAlGore\BehatSayExtension\BehatSaySubscriber'))
+        $container->setParameter('behatsay.voice', $config['voice']);
+        $container->setParameter('behatsay.roles', $config['roles']);
+        $definition = (new Definition('FauxAlGore\BehatSayExtension\BehatSaySubscriber', array ('%behatsay.voice%', '%behatsay.roles%')))
         ->addTag('event_dispatcher.subscriber');
         $container->setDefinition('command_runner.listener', $definition);
-        $container->setParameter('behatsay.voice', $config['voice']);
+
     }
     public function process(ContainerBuilder $container)
     {
