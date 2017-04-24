@@ -9,8 +9,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\StepNode;
 
-
-
 class BehatSaySubscriber implements EventSubscriberInterface
 {
 
@@ -21,11 +19,13 @@ class BehatSaySubscriber implements EventSubscriberInterface
         $this->role_voices = $roles;
     }
 
-   public function isStepRoleSetting(StepNode $step) {
-       return !empty(strpos($step->getText(), 'logged in as a'));
-   }
+    public function isStepRoleSetting(StepNode $step)
+    {
+        return !empty(strpos($step->getText(), 'logged in as a'));
+    }
 
-    protected function getVoiceFlag() {
+    protected function getVoiceFlag()
+    {
         if ($this->current_voice) {
             return '--voice=' . $this->current_voice;
         }
@@ -34,14 +34,14 @@ class BehatSaySubscriber implements EventSubscriberInterface
 
     protected function setVoice(BeforeStepTested $event)
     {
-       $step = $event->getStep();
-       if ($this->isStepRoleSetting($event->getStep())) {
-           foreach($this->role_voices as $role => $voice) {
-               if (strpos($step->getText(), '"' . $role . '"')) {
-                   $this->current_voice = $voice;
-               }
-           }
-       }
+        $step = $event->getStep();
+        if ($this->isStepRoleSetting($event->getStep())) {
+            foreach ($this->role_voices as $role => $voice) {
+                if (strpos($step->getText(), '"' . $role . '"')) {
+                    $this->current_voice = $voice;
+                }
+            }
+        }
     }
 
     public function beforeStep(BeforeStepTested $event)

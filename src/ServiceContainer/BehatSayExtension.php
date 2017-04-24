@@ -59,10 +59,6 @@ class BehatSayExtension implements ExtensionInterface
             ->scalarNode('voice')->defaultNull()->end()
             ->end()
             ->end();
-
-
-
-
     }
 
     /**
@@ -78,7 +74,6 @@ class BehatSayExtension implements ExtensionInterface
         $definition = (new Definition('FauxAlGore\BehatSayExtension\BehatSaySubscriber', array ('%behatsay.voice%', '%behatsay.roles%')))
         ->addTag('event_dispatcher.subscriber');
         $container->setDefinition('command_runner.listener', $definition);
-
     }
     public function process(ContainerBuilder $container)
     {
