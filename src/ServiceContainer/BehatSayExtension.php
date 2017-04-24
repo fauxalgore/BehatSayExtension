@@ -53,7 +53,7 @@ class BehatSayExtension implements ExtensionInterface
           ->end()
           // The voice setting is configurable but that configuration is not yet
           // used by BehatSaySubscriber.
-          ->scalarNode('voice')->defaultNull()->end()
+          ->scalarNode('default_voice')->defaultNull()->end()
           ->end()
         ->end();
     }
@@ -66,10 +66,10 @@ class BehatSayExtension implements ExtensionInterface
    */
     public function load(ContainerBuilder $container, array $config)
     {
-        $container->setParameter('behatsay.voice', $config['voice']);
+        $container->setParameter('behatsay.default_voice', $config['default_voice']);
         $container->setParameter('behatsay.roles', $config['roles']);
         $class = 'FauxAlGore\BehatSayExtension\BehatSaySubscriber';
-        $definition = (new Definition($class, array ('%behatsay.voice%', '%behatsay.roles%')))
+        $definition = (new Definition($class, array ('%behatsay.default_voice%', '%behatsay.roles%')))
         ->addTag('event_dispatcher.subscriber');
         $container->setDefinition('command_runner.listener', $definition);
     }

@@ -12,10 +12,10 @@ use Behat\Gherkin\Node\StepNode;
 class BehatSaySubscriber implements EventSubscriberInterface
 {
 
-    public function __construct($voice, $roles)
+    public function __construct($default_voice, $roles)
     {
-        $this->default_voice = $voice;
-        $this->current_voice = $voice;
+        $this->default_voice = $default_voice;
+        $this->current_voice = $default_voice;
         $this->role_voices = $roles;
     }
 
