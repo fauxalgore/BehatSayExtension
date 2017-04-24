@@ -45,7 +45,9 @@ class BehatSaySubscriber implements EventSubscriberInterface
     }
 
     // @todo, parse whole scenario to set voice or reset to default.
-    public function beforeScenario() {}
+    public function beforeScenario()
+    {
+    }
 
     public function beforeStep(BeforeStepTested $event)
     {
