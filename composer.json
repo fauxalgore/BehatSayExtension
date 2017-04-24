@@ -1,5 +1,5 @@
 {
-    "name": "fauxalgore/BehatSayExtension",
+    "name": "fauxalgore/behat-say-extension",
     "description": "Hear your Behat steps through the 'say' command.",
     "authors": [
         {
