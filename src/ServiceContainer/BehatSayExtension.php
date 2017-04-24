@@ -71,7 +71,8 @@ class BehatSayExtension implements ExtensionInterface
     {
         $container->setParameter('behatsay.voice', $config['voice']);
         $container->setParameter('behatsay.roles', $config['roles']);
-        $definition = (new Definition('FauxAlGore\BehatSayExtension\BehatSaySubscriber', array ('%behatsay.voice%', '%behatsay.roles%')))
+        $class = 'FauxAlGore\BehatSayExtension\BehatSaySubscriber';
+        $definition = (new Definition($class, array ('%behatsay.voice%', '%behatsay.roles%')))
         ->addTag('event_dispatcher.subscriber');
         $container->setDefinition('command_runner.listener', $definition);
     }

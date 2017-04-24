@@ -47,7 +47,9 @@ class BehatSaySubscriber implements EventSubscriberInterface
     public function beforeStep(BeforeStepTested $event)
     {
         $this->setVoice($event);
-        exec('say ' . $this->getVoiceFlag()  . ' ' . escapeshellarg($this->getCompleteStepPhrase($event)) . ' > /dev/null 2>/dev/null &');
+        $text = escapeshellarg($this->getCompleteStepPhrase($event));
+        $voice = $this->getVoiceFlag();
+        exec('say ' . $voice . ' ' . $text . ' > /dev/null 2>/dev/null &');
     }
 
     protected function getCompleteStepPhrase(BeforeStepTested $event)
