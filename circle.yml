@@ -1,9 +1,0 @@
-dependencies:
-  cache_directories:
-    - ~/.composer/cache
-  pre:
-    - composer global require "hirak/prestissimo:^0.3"
-test:
-
-  override:
-    - composer phpcs
