@@ -1,5 +1,7 @@
 # BehatSay
 
+[![CircleCI](https://circleci.com/gh/fauxalgore/BehatSayExtension.svg?style=svg)](https://circleci.com/gh/fauxalgore/BehatSayExtension)
+
 This Behat Extension uses the `say` command to speak aloud your Behat steps as they run.
 
 ## Configuring
